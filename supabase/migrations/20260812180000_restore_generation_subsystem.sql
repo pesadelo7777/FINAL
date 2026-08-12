@@ -27,8 +27,7 @@ declare
   v_definition text := pg_catalog.pg_get_functiondef(
     'public.protect_secure_columns()'::regprocedure
   );
-  v_marker text :=
-    'if coalesce(auth.jwt() ->> ''role'', '''') = ''service_role'' then';
+  v_marker_pattern text := $pattern$\mif[[:space:]]+coalesce[[:space:]]*\([[:space:]]*auth\.jwt[[:space:]]*\([[:space:]]*\)[[:space:]]*->>[[:space:]]*'role'[[:space:]]*,[[:space:]]*''[[:space:]]*\)[[:space:]]*=[[:space:]]*'service_role'[[:space:]]+then\M$pattern$;
   v_guard text := $guard$if coalesce(
     pg_catalog.current_setting(
       'lifevu.generation_balance_authorized',
@@ -58,22 +57,32 @@ declare
   end if;
 
   $guard$;
-  v_position integer;
+  v_match_count integer;
 begin
   if pg_catalog.strpos(
     v_definition,
     'lifevu.generation_balance_authorized'
   ) = 0 then
-    v_position := pg_catalog.strpos(v_definition, v_marker);
+    select pg_catalog.count(*)
+    into v_match_count
+    from pg_catalog.regexp_matches(
+      v_definition,
+      v_marker_pattern,
+      'gi'
+    );
 
-    if v_position = 0 then
+    if v_match_count <> 1 then
       raise exception
-        'Expected service_role guard in public.protect_secure_columns()';
+        'Expected exactly one service_role guard in public.protect_secure_columns(), found %',
+        v_match_count;
     end if;
 
-    v_definition := pg_catalog.substr(v_definition, 1, v_position - 1)
-      || v_guard
-      || pg_catalog.substr(v_definition, v_position);
+    v_definition := pg_catalog.regexp_replace(
+      v_definition,
+      v_marker_pattern,
+      v_guard || E'\\&',
+      'i'
+    );
     execute v_definition;
   end if;
 end;
