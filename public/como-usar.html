@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070708">
+    <title>Como usar — LifeVU</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/landing.css?v=4">
+    <style>
+        body {
+            background-color: #070707;
+            color: #ffffff;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        /* Topnav override */
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(7, 7, 7, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            z-index: 10;
+            position: relative;
+        }
+        .doc-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        .doc-header p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        .doc-section {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .doc-section h2 {
+            color: var(--wine, #5e0b15);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        .doc-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #eee;
+        }
+        .alert-box {
+            background: rgba(94, 11, 21, 0.1);
+            border-left: 4px solid #5e0b15;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .alert-box strong {
+            color: #ff5555;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .step-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+        .step-number {
+            background: #5e0b15;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .visual-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .visual-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+        .visual-box span {
+            display: block;
+            color: #5e0b15;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        .visual-box strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .visual-box p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .visual-arrow {
+            color: #5e0b15;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .modes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media(min-width: 768px) {
+            .modes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .mode-card {
+            background: #161616;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .mode-card h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .mode-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mode-card ul li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        .mode-card ul li strong {
+            color: #5e0b15;
+        }
+    </style>
+    <link rel="stylesheet" href="css/docs-v2.css?v=1">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="top-navbar">
+        <a href="/" class="logo-nav">
+            <img src="img/logo-core.png" alt="" class="logo-img" width="625" height="482">
+            <span class="docs-wordmark">LIFE<strong>VU</strong></span>
+        </a>
+        <nav class="nav-links">
+            <a href="/">Voltar ao início</a>
+            <a href="dashboard.html" class="docs-engine-link">Acessar a engine</a>
+        </nav>
+    </header>
+
+    <main class="doc-container">
+        <div class="doc-header">
+            <span class="docs-kicker">Manual de operação / 01</span>
+            <h1>Como usar a<br><em>LifeVU.</em></h1>
+            <p>Da identidade ao prompt final: siga o fluxo para manter rosto, pose e direção na ordem correta.</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>1. Passo a Passo Geral</h2>
+            <ul class="step-list">
+                <li>
+                    <div class="step-number">1</div>
+                    <div>Selecione o modo desejado (ex: Renderizar, Clone de Pose ou Duplas).</div>
+                </li>
+                <li>
+                    <div class="step-number">2</div>
+                    <div>Carregue as imagens solicitadas na Engine.</div>
+                </li>
+                <li>
+                    <div class="step-number">3</div>
+                    <div>Ajuste os parâmetros de iluminação, estilo e ambiente.</div>
+                </li>
+                <li>
+                    <div class="step-number">4</div>
+                    <div>Clique em gerar para produzir o seu prompt otimizado.</div>
+                </li>
+                <li>
+                    <div class="step-number">5</div>
+                    <div>Copie o prompt final fornecido pela plataforma.</div>
+                </li>
+                <li>
+                    <div class="step-number">6</div>
+                    <div>Abra a inteligência artificial da sua preferência (GPT ou Gemini).</div>
+                </li>
+                <li>
+                    <div class="step-number">7</div>
+                    <div><strong>Anexe as imagens EXATAMENTE NA MESMA ORDEM</strong> apresentada na Engine.</div>
+                </li>
+                <li>
+                    <div class="step-number">8</div>
+                    <div>Cole o prompt que você copiou e inicie a geração.</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h2>2. Modos de Geração e Ordem</h2>
+            <p style="color: #ccc; margin-bottom: 20px;">Cada modo na Engine possui uma finalidade específica. Siga estritamente a ordem indicada para cada um deles.</p>
+            
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <h4>Renderizar (Aprimoramento)</h4>
+                    <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">Melhora iluminação e texturas sem alterar a pose original.</p>
+                    <ul>
+                        <li><strong>IMAGEM 1:</strong> Avatar (Imagem base a ser aprimorada)</li>
+                    </ul>
+                </div>
+                
+                <div class="mode-card">
+                    <h4>Referência & Pose (Clone de Pose)</h4>
+                    <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">Clona a pose de uma foto mantendo o rosto do seu avatar.</p>
+                    <ul>
+                        <li><strong>IMAGEM 1:</strong> Avatar (Identidade / Rosto)</li>
+                        <li><strong>IMAGEM 2:</strong> Referência (Pose / Composição)</li>
+                    </ul>
+                </div>
+
+                <div class="mode-card" style="grid-column: 1 / -1;">
+                    <h4>Casal & Duplas</h4>
+                    <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">Funde duas identidades de avatares em uma única foto de referência.</p>
+                    <ul>
+                        <li><strong>IMAGEM 1:</strong> Avatar 1</li>
+                        <li><strong>IMAGEM 2:</strong> Avatar 2</li>
+                        <li><strong>IMAGEM 3:</strong> Referência Casal (Pose)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>3. A Regra de Ouro: A Ordem Importa</h2>
+            
+            <div class="alert-box">
+                <strong>ATENÇÃO À ORDEM DAS IMAGENS!</strong>
+                A ordem em que as imagens são enviadas ao GPT ou Gemini faz parte da estrutura lógica do prompt. Se você inverter a ordem das imagens, a IA não saberá quem deve fornecer o rosto e quem fornece a pose.
+            </div>
+
+            <p style="color: #ccc; text-align: center; margin-top: 30px;">EXEMPLO OBRIGATÓRIO: CLONE DE POSE</p>
+
+            <div class="visual-flow">
+                <div class="visual-box" style="border-color: #5e0b15;">
+                    <span>01</span>
+                    <strong>AVATAR</strong>
+                    <p>Rosto / Identidade visual</p>
+                </div>
+                <div class="visual-arrow">↓</div>
+                <div class="visual-box" style="border-color: #5e0b15;">
+                    <span>02</span>
+                    <strong>MODELO</strong>
+                    <p>Pose / Referência de ambiente</p>
+                </div>
+                <div class="visual-arrow">↓</div>
+                <div class="visual-box" style="background: #222; border-color: #444;">
+                    <strong>PROMPT LIFE VU</strong>
+                    <p>Prompt copiado da Engine</p>
+                </div>
+                <div class="visual-arrow">↓</div>
+                <div class="visual-box" style="background: #000; border-color: #555;">
+                    <strong>GPT / GEMINI</strong>
+                    <p>Anexar e enviar tudo junto!</p>
+                </div>
+            </div>
+            
+            <div style="background: rgba(255,85,85,0.1); border-left: 4px solid #ff5555; padding: 15px; border-radius: 4px; margin-top: 20px;">
+                <p style="margin: 0; color: #fff;"><strong>ERRADO:</strong> 1. Modelo ➔ 2. Avatar</p>
+            </div>
+            <div style="background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 4px; margin-top: 10px;">
+                <p style="margin: 0; color: #fff;"><strong>CORRETO:</strong> 1. Avatar ➔ 2. Modelo</p>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>4. Dicas de Ouro para Imagens</h2>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 10px;">AVATAR (Identidade)</h3>
+                    <ul style="color: #aaa; padding-left: 20px;">
+                        <li>Rosto visível e sem obstruções graves;</li>
+                        <li>Imagem com boa qualidade e nitidez;</li>
+                        <li>Evite capturar o rosto excessivamente escondido;</li>
+                        <li>Utilize a imagem que realmente representa o seu personagem com precisão.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 10px;">MODELO (Referência)</h3>
+                    <ul style="color: #aaa; padding-left: 20px;">
+                        <li>Pose claramente visível;</li>
+                        <li>Composição visual compreensível;</li>
+                        <li>Referência suficientemente nítida para a IA conseguir interpretar o ambiente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full text-center py-6 mt-12 border-t border-white/5 bg-black/20 backdrop-blur-sm z-10 relative" style="width: 100%; text-align: center; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px;">
+        <p style="color: #666; font-size: 0.9rem;">
+            &copy; 2026 Life VU. Todos os direitos reservados.
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Símbolo LifeVU</title>
+  <desc id="desc">Marca geométrica em forma de lente, com lâminas e núcleo vermelho.</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".46" stop-color="#a7a9af"/>
+      <stop offset=".7" stop-color="#f7f7f4"/>
+      <stop offset="1" stop-color="#777b83"/>
+    </linearGradient>
+    <radialGradient id="energy" cx="50%" cy="50%" r="62%">
+      <stop offset="0" stop-color="#ff4d6a"/>
+      <stop offset=".28" stop-color="#d51d3b"/>
+      <stop offset=".68" stop-color="#780f25"/>
+      <stop offset="1" stop-color="#25040c"/>
+    </radialGradient>
+    <clipPath id="lens">
+      <path d="M31 160 83 106l77-43 77 43 52 54-52 54-77 43-77-43Z"/>
+    </clipPath>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g fill="#101116" stroke="url(#metal)" stroke-width="5" stroke-linejoin="miter">
+    <path d="M160 17 260 76l-25 38-75-48-75 48-25-38Z"/>
+    <path d="m260 76 43 84-43 84-42-31 41-53-41-53Z"/>
+    <path d="m260 244-100 59-100-59 25-38 75 48 75-48Z"/>
+    <path d="M60 244 17 160 60 76l42 31-41 53 41 53Z"/>
+  </g>
+
+  <g clip-path="url(#lens)" fill="none" stroke="#d9dbe0" stroke-width="1.5" opacity=".76">
+    <path d="M-40 44 247 331M-18 22l287 287M4 0l287 287M26-22l287 287M48-44l287 287M70-66l287 287M92-88l287 287"/>
+    <path d="M360 44 73 331M338 22 51 309M316 0 29 287M294-22 7 265M272-44-15 243M250-66-37 221M228-88-59 199"/>
+  </g>
+  <path d="M31 160 83 106l77-43 77 43 52 54-52 54-77 43-77-43Z" fill="none" stroke="url(#metal)" stroke-width="6"/>
+
+  <circle cx="160" cy="160" r="61" fill="url(#energy)" opacity=".94" filter="url(#glow)"/>
+  <g fill="#17181d" stroke="url(#metal)" stroke-width="5" stroke-linejoin="round">
+    <path d="m160 75 44 18-29 66-34-27Z"/>
+    <path d="m233 118 6 47-71 8-4-43Z"/>
+    <path d="m233 202-38 29-43-57 36-24Z"/>
+    <path d="m160 245-44-18 29-66 34 27Z"/>
+    <path d="m87 202-6-47 71-8 4 43Z"/>
+    <path d="m87 118 38-29 43 57-36 24Z"/>
+  </g>
+  <polygon points="160,116 198,138 198,182 160,204 122,182 122,138" fill="url(#energy)" stroke="url(#metal)" stroke-width="5"/>
+  <circle cx="160" cy="160" r="22" fill="#d51d3b" opacity=".3" filter="url(#glow)"/>
+  <circle cx="160" cy="160" r="5" fill="#fff" opacity=".9"/>
+</svg>

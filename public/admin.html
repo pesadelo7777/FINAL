@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070708">
+    <title>LifeVU Control — Centro de Comando</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/landing.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { background: #070707; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 2rem; margin: 0; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 2rem; }
+        .stat-card { background: #111; border: 1px solid #333; padding: 1.5rem; border-radius: 12px; text-align: center; }
+        .stat-card i { font-size: 2rem; color: #5e0b15; margin-bottom: 10px; }
+        .stat-card h3 { margin: 0; color: #aaa; font-size: 0.9rem; text-transform: uppercase; }
+        .stat-card p { margin: 10px 0 0 0; font-size: 1.8rem; font-weight: bold; color: #fff; }
+        .stat-card .highlight { color: #00ffcc; }
+
+        .search-box { width: 100%; padding: 15px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 15px; box-sizing: border-box; font-size: 1rem; }
+        .search-box:focus { outline: none; border-color: #5e0b15; }
+
+        .table-container { overflow-x: auto; background: #111; border-radius: 12px; border: 1px solid #222; margin-bottom: 2rem; }
+        .user-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .user-table th, .user-table td { padding: 1rem 1.5rem; border-bottom: 1px solid #222; }
+        .user-table th { background: #151515; color: #aaa; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .user-table tbody tr:hover { background: #1a1a1a; }
+        
+        .tag-vip { background: rgba(94, 11, 21, 0.2); color: #ff5555; padding: 3px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; border: 1px solid #5e0b15; }
+        .tag-free { background: rgba(255, 255, 255, 0.1); color: #aaa; padding: 3px 8px; border-radius: 6px; font-size: 0.8rem; }
+        .tag-manual { background: #5e0b15; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .tag-auto { background: #008542; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .tag-sys { background: #888; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        
+        .btn-action { background: #5e0b15; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .btn-action:hover { background: #8a101f; }
+        .btn-ban { background: transparent; border: 1px solid #555; color: #aaa; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .btn-ban:hover { background: #333; }
+        .btn-ban.banned { background: rgba(255, 0, 0, 0.1); border-color: #ff3333; color: #ff3333; }
+        .btn-ban.banned:hover { background: #ff3333; color: #fff; }
+        .btn-secundary { background: #333; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-secundary:hover { background: #444; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: #111; padding: 2rem; border-radius: 12px; width: 420px; border: 1px solid #333; max-height: 90vh; overflow-y: auto; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; margin-bottom: 5px; color: #aaa; font-size: 0.85rem; text-transform: uppercase; }
+        .input-group input, .input-group select { width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
+    </style>
+    <link rel="stylesheet" href="css/admin-v2.css?v=1">
+</head>
+<body>
+    <header class="admin-header">
+        <a class="admin-brand" href="dashboard.html" aria-label="LifeVU Control">
+            <img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+            <span><span class="brand-life">LIFE</span><span class="brand-vu">VU</span><small>CONTROL</small></span>
+        </a>
+        <div class="admin-session"><span></span> Sessão administrativa</div>
+        <button id="btnVoltar" class="btn-secundary"><i class="ph ph-arrow-left"></i> <span>Voltar ao Studio</span></button>
+    </header>
+
+    <main class="admin-main">
+        <section class="admin-intro">
+            <div>
+                <p class="admin-kicker">Inteligência operacional</p>
+                <h1>Centro de<br><em>comando.</em></h1>
+                <p>Clientes, planos e movimentações reunidos em uma leitura única.</p>
+            </div>
+            <div class="admin-radar" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+            </div>
+        </section>
+
+    <!-- PAINEL DE ESTATÍSTICAS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="ph-fill ph-users"></i>
+            <h3>Total de Clientes</h3>
+            <p id="stat-users">0</p>
+        </div>
+        <div class="stat-card">
+            <i class="ph-fill ph-crown"></i>
+            <h3>Assinantes VIP Ativos</h3>
+            <p id="stat-vips">0</p>
+        </div>
+        <div class="stat-card">
+            <i class="ph-fill ph-coins"></i>
+            <h3>Moedas em Circulação</h3>
+            <p id="stat-coins">0</p>
+        </div>
+        <div class="stat-card">
+            <i class="ph-fill ph-trend-up" style="color: #00ffcc;"></i>
+            <h3>Receita Real (Créditos)</h3>
+            <p id="stat-profit" class="highlight">0</p>
+        </div>
+    </div>
+
+    <section class="admin-section">
+        <div class="admin-section-heading">
+            <div><span>01 / USUÁRIOS</span><h2>Base de clientes</h2></div>
+            <label class="search-wrap" for="search-input"><i class="ph ph-magnifying-glass"></i><input type="text" id="search-input" class="search-box" placeholder="Buscar por nick, nome ou ID..."></label>
+        </div>
+
+    <!-- TABELA DE CLIENTES -->
+    <div class="table-container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Conta IMVU</th>
+                    <th>Plano Atual</th>
+                    <th>Moedas</th>
+                    <th style="text-align: right;">Gerenciar</th>
+                </tr>
+            </thead>
+            <tbody id="users-body">
+                <tr><td colspan="5" style="text-align: center; padding: 2rem;">Carregando banco de dados...</td></tr>
+            </tbody>
+        </table>
+    </div>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-heading">
+            <div><span>02 / ATIVIDADE</span><h2>Transações recentes</h2></div>
+            <p><i class="ph ph-clock-counter-clockwise"></i> Histórico mais recente da operação</p>
+        </div>
+        <div class="table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Data e Hora</th>
+                        <th>Nick IMVU</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                    <tr><td colspan="4" style="text-align: center; padding: 2rem;">Carregando histórico...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    </main>
+
+    <!-- MODAL DE EDIÇÃO DE CLIENTE (COM TODOS OS CAMPOS CORRETOS) -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="margin-top: 0; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px;">Editar Cliente</h3>
+            <p style="color: #00ffcc; font-weight: bold; margin-bottom: 20px;" id="edit-username">@nick</p>
+            
+            <input type="hidden" id="edit-userid">
+            
+            <div class="input-group">
+                <label>Saldo de Moedas Avulsas</label>
+                <input type="number" id="edit-moedas" min="0">
+            </div>
+
+            <div class="input-group">
+                <label>Plano VIP</label>
+                <select id="edit-plano">
+                    <option value="Free">Free (Sem VIP)</option>
+                    <option value="VIP 15 Dias">VIP 15 Dias</option>
+                    <option value="VIP 30 Dias">VIP 30 Dias</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Dias Restantes (VIP)</label>
+                <input type="number" id="edit-dias" min="0" placeholder="Ex: 15">
+            </div>
+
+            <div class="input-group">
+                <label>Total de Créditos Pagos (Receita Real)</label>
+                <input type="number" id="edit-receita" min="0" placeholder="Ex: 20000">
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-action" style="flex: 1; justify-content: center;" onclick="salvarEdicao()">SALVAR DADOS</button>
+                <button class="btn-secundary" style="flex: 1;" onclick="fecharModal()">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://hrldelnvaukkroupanvg.supabase.co';
+        const supabaseKey = 'sb_publishable_s4MEjHRwsFnDfUKBLheacg_wjuDzguc';
+        const lifeVuSupabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('btnVoltar').addEventListener('click', () => window.location.href = 'dashboard.html');
+
+        let cacheUsers = [];
+
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('#users-body tr').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        async function carregarAdmin() {
+            const { data: { user } } = await lifeVuSupabase.auth.getUser();
+            if (!user) { window.location.href = '/'; return; }
+
+            const { data: adminCheck } = await lifeVuSupabase.from('profiles').select('role').eq('id', user.id).single();
+            if (!adminCheck || adminCheck.role !== 'admin') {
+                alert("Acesso Negado."); window.location.href = 'dashboard.html'; return;
+            }
+
+            const { data: users } = await lifeVuSupabase.from('profiles').select('*');
+            cacheUsers = users || [];
+            
+            const tbody = document.getElementById('users-body');
+            tbody.innerHTML = '';
+
+            let totalVIPs = 0; let totalMoedas = 0; let receitaRealTotal = 0;
+
+            if(users) {
+                users.forEach(u => {
+                    const moedasAvulsas = u.moedas_avulsas || 0;
+                    const saldoTotal = moedasAvulsas + (u.moedas_free || 0);
+                    const creditosPagos = u.creditos_pagos || 0; 
+                    
+                    let isVip = false;
+                    if (u.plano && u.plano.includes('VIP')) {
+                        totalVIPs++; isVip = true;
+                    }
+                    
+                    totalMoedas += moedasAvulsas;
+                    receitaRealTotal += creditosPagos;
+
+                    const tagPlano = isVip ? `<span class="tag-vip">${u.plano}</span>` : `<span class="tag-free">Free</span>`;
+                    const nickDisplay = u.imvu_account ? `@${u.imvu_account}` : '<span style="color:#555;">Não vinculado</span>';
+                    const isBanned = u.is_banned || false;
+                    const btnBanClass = isBanned ? 'btn-ban banned' : 'btn-ban';
+                    const btnBanIcon = isBanned ? 'ph-prohibit' : 'ph-warning-circle';
+                    const btnBanText = isBanned ? 'Desbanir' : 'Suspender';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${u.username || u.id.substring(0,8)}</strong><br><small style="color:#777;">${u.id.substring(0,12)}...</small></td>
+                        <td style="color: #00ffcc; font-weight: bold;">${nickDisplay}</td>
+                        <td>${tagPlano}</td>
+                        <td><b style="color: #fff;">${saldoTotal}</b> <small style="color:#777;">(${moedasAvulsas} avulsas)</small></td>
+                        <td style="display: flex; gap: 8px; justify-content: flex-end;">
+                            <button class="${btnBanClass}" onclick="toggleBan('${u.id}', ${isBanned})"><i class="ph-fill ${btnBanIcon}"></i> ${btnBanText}</button>
+                            <button class="btn-action" onclick="abrirEdicao('${u.id}')"><i class="ph ph-pencil-simple"></i> Editar</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById('stat-users').innerText = users.length;
+                document.getElementById('stat-vips').innerText = totalVIPs;
+                document.getElementById('stat-coins').innerText = totalMoedas;
+                document.getElementById('stat-profit').innerText = receitaRealTotal.toLocaleString('pt-BR');
+            }
+
+            const { data: historico } = await lifeVuSupabase.from('historico_transacoes')
+                .select('*, profiles(imvu_account)')
+                .order('data_hora', { ascending: false })
+                .limit(30);
+                
+            const hbody = document.getElementById('history-body');
+            hbody.innerHTML = '';
+
+            if (historico && historico.length > 0) {
+                historico.forEach(h => {
+                    const dataFormatada = new Date(h.data_hora).toLocaleString('pt-BR');
+                    const nickRelacionado = (h.profiles && h.profiles.imvu_account) ? `@${h.profiles.imvu_account}` : 'N/A';
+                    
+                    let tagTipo = '';
+                    if(h.tipo === 'Manual') tagTipo = '<span class="tag-manual">Manual</span>';
+                    else if(h.tipo === 'Automático') tagTipo = '<span class="tag-auto">Automático</span>';
+                    else tagTipo = '<span class="tag-sys">' + h.tipo + '</span>';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="font-size: 0.85rem; color: #aaa;">${dataFormatada}</td>
+                        <td style="color: #00ffcc; font-weight: bold;">${nickRelacionado}</td>
+                        <td>${tagTipo}</td>
+                        <td style="font-size: 0.9rem;">${h.descricao}</td>
+                    `;
+                    hbody.appendChild(tr);
+                });
+            } else {
+                hbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">Nenhuma transação registrada.</td></tr>';
+            }
+        }
+
+        window.toggleBan = async function(userId, currentBanStatus) {
+            const acao = currentBanStatus ? "DESBANIR" : "SUSPENDER";
+            if (!confirm(`Tem certeza que deseja ${acao} este usuário? Ele perderá acesso à engine imediatamente.`)) return;
+
+            const novoStatus = !currentBanStatus;
+            const { error } = await lifeVuSupabase.rpc('admin_toggle_ban', { target_user_id: userId, ban_status: novoStatus });
+            
+            if (error) alert("Erro ao processar suspensão: " + error.message);
+            else carregarAdmin();
+        }
+
+        function abrirEdicao(userId) {
+            const u = cacheUsers.find(x => x.id === userId);
+            if (!u) return;
+
+            document.getElementById('edit-userid').value = u.id;
+            document.getElementById('edit-username').innerText = u.imvu_account ? `@${u.imvu_account}` : (u.username || 'Usuário');
+            document.getElementById('edit-moedas').value = u.moedas_avulsas || 0;
+            document.getElementById('edit-plano').value = u.plano || 'Free';
+            document.getElementById('edit-receita').value = u.creditos_pagos || 0;
+            
+            const inputDias = document.getElementById('edit-dias');
+            
+            if (u.plano && u.plano.includes('VIP') && u.vip_vencimento) {
+                const dataVenc = new Date(u.vip_vencimento);
+                const hoje = new Date();
+                const dias = Math.ceil((dataVenc.getTime() - hoje.getTime()) / (1000 * 3600 * 24));
+                inputDias.value = dias > 0 ? dias : 0;
+            } else {
+                inputDias.value = '';
+            }
+            
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        document.getElementById('edit-plano').addEventListener('change', function(e) {
+            const planoSelecionado = e.target.value;
+            const inputDias = document.getElementById('edit-dias');
+            
+            if (planoSelecionado === 'VIP 15 Dias') inputDias.value = 15;
+            else if (planoSelecionado === 'VIP 30 Dias') inputDias.value = 30;
+            else if (planoSelecionado === 'Free') {
+                inputDias.value = '';
+            }
+        });
+
+        function fecharModal() { document.getElementById('editModal').classList.remove('active'); }
+
+        async function salvarEdicao() {
+            const btnSalvar = document.querySelector('.btn-action');
+            btnSalvar.innerText = "Salvando...";
+
+            const id = document.getElementById('edit-userid').value;
+            const moedasNovas = parseInt(document.getElementById('edit-moedas').value) || 0;
+            const planoNovo = document.getElementById('edit-plano').value;
+            const diasInput = document.getElementById('edit-dias').value;
+            const receitaNova = parseInt(document.getElementById('edit-receita').value) || 0;
+
+            let vencimentoNovo = null;
+            if (planoNovo !== 'Free' && diasInput !== "" && diasInput !== null) {
+                const venc = new Date();
+                venc.setDate(venc.getDate() + parseInt(diasInput));
+                vencimentoNovo = venc.toISOString();
+            }
+
+            const { error } = await lifeVuSupabase.rpc('admin_update_user', {
+                target_user_id: id,
+                novas_moedas: moedasNovas,
+                novo_plano: planoNovo,
+                novo_vencimento: vencimentoNovo,
+                novos_creditos_pagos: receitaNova
+            });
+
+            btnSalvar.innerHTML = "SALVAR DADOS";
+            
+            if (error) alert("Erro ao salvar! Motivo: " + error.message);
+            else { fecharModal(); carregarAdmin(); }
+        }
+
+        carregarAdmin();
+    </script>
+</body>
+</html>

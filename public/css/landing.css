@@ -1,0 +1,918 @@
+:root {
+    /* Foundations */
+    --bg-base: #070707;
+    --bg-surface: #0c0c0c;
+    --bg-elevated: #121212;
+    --border-color: #222222;
+    --border-light: rgba(255, 255, 255, 0.05);
+    
+    /* Brand: Wine Red Deepened */
+    --wine: #5e0b15;
+    --wine-hover: #7a0e1b;
+    --wine-soft: rgba(94, 11, 21, 0.15);
+    --wine-border: rgba(94, 11, 21, 0.4);
+    --wine-glow: rgba(94, 11, 21, 0.15);
+    
+    /* Typography */
+    --text-primary: #ffffff;
+    --text-muted: #888888;
+    
+    /* Metrics */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    
+    /* Motion */
+    --motion-fast: 150ms;
+    --motion-base: 250ms;
+    --motion-slow: 400ms;
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-emphasized: cubic-bezier(0.2, 0.0, 0, 1);
+    
+    /* Depth */
+    --shadow-subtle: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: transparent;
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ativa a rolagem suave quando clica nos links do menu */
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================
+   MENU SUPERIOR (NAVBAR)
+========================================= */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row !important; /* For�a a ficar sempre na mesma linha */
+    justify-content: space-between; /* Logo de um lado, bot�es do outro */
+    align-items: center;
+    padding: 0 4rem;
+    height: 80px; /* Trava a barra para ficar fina e elegante */
+    background: rgba(7, 7, 7, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   ESTILIZA��O DA LOGO E NAVBAR
+========================================= */
+.logo-nav {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Essa � a classe que vai domar o tamanho da sua logo */
+.logo-img {
+    max-height: 50px; /* Ajustado para caber perfeitamente dentro da barra de 80px */
+    max-width: 200px; 
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Texto provis�rio (pode apagar se j� estiver usando s� a imagem) */
+.logo-nav span {
+    color: var(--wine);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--wine);
+}
+
+.nav-btn-login {
+    background-color: var(--wine);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold !important;
+    color: #ffffff !important; /* <-- Linha adicionada para for�ar o texto branco */
+    border: none;
+    cursor: pointer;
+}
+
+.nav-btn-login:hover {
+    background-color: var(--wine-hover);
+    color: #fff !important;
+}
+
+/* Ajuste no Container Principal para n�o ficar embaixo do menu */
+.hero-container {
+    padding-top: 8rem; /* Espa�o pro menu */
+}
+
+/* =========================================
+   SE��O DE PLANOS E PRE�OS (CARDS)
+========================================= */
+.pricing-section {
+    padding: 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+    
+    background-clip: text; /* <-- Adicionada a propriedade padr�o */
+    
+    color: transparent; /* <-- Boa pr�tica para garantir que fique transparente em todos os navegadores */
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.pricing-card {
+    background: linear-gradient(145deg, var(--bg-surface), #0a0a0a);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    /* Transi��es leves e suaves */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Efeito de Hover (Passar o mouse) */
+.pricing-card:hover {
+    transform: translateY(-10px); /* Flutua suavemente para cima */
+    box-shadow: 0 20px 40px rgba(94, 11, 21, 0.25); /* Brilho vinho no fundo */
+    border-color: var(--wine); /* Borda acende */
+}
+
+.pricing-card.popular {
+    border-color: var(--wine);
+}
+
+/* Tag de Destaque */
+.pricing-card.popular::before {
+    content: "✓";
+    position: absolute;
+    top: 20px;
+    right: -40px;
+    background: var(--wine);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 5px 45px;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+}
+
+.plan-name {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.plan-price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.plan-price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: normal;
+    white-space: nowrap; /* Garante que o "/15 dias" n�o quebre de linha */
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    margin-bottom: 1rem;
+    color: #ccc;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+}
+
+.plan-features li::before {
+    content: "✓";
+    color: var(--wine);
+    font-weight: bold;
+}
+
+.plan-features li.cross {
+    color: #555;
+}
+
+.plan-features li.cross::before {
+    content: "✓";
+    color: #555;
+}
+
+.btn-plan {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--border-color);
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+}
+
+.pricing-card:hover .btn-plan {
+    border-color: var(--wine);
+}
+
+.btn-plan.filled {
+    background: var(--wine);
+    border-color: var(--wine);
+}
+
+.btn-plan.filled:hover {
+    background: var(--wine-hover);
+}
+
+/* Responsividade dos Cards (Adapta��o para telas menores) */
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas no tablet */
+    }
+}
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr; /* 1 coluna no celular */
+    }
+}
+
+/* =========================================
+   AJUSTE DAS TAGS (BADGES)
+========================================= */
+.badges {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha sem quebrar o layout */
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem; /* Reduzido para ficar mais sofisticado */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   SISTEMA DE BACKGROUND ANIMADO
+========================================= */
+.bg-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fadeCycle 12s infinite;
+}
+
+/* Certifique-se de colocar as imagens nessas pastas! */
+.slide-1 {
+    background-image: url('../img/avatar-antes.jpg'); 
+    background-color: #1a0306; /* Cor de fallback caso a imagem n�o carregue */
+    animation-delay: 0s;
+}
+
+.slide-2 {
+    background-image: url('../img/avatar-depois.jpg');
+    background-color: #000000;
+    animation-delay: 6s;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(7, 7, 7, 0.95) 0%, rgba(7, 7, 7, 0.8) 50%, rgba(7, 7, 7, 0.6) 100%);
+}
+
+@keyframes fadeCycle {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    40% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL
+========================================= */
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    min-height: 100vh;
+    padding: 4rem;
+    gap: 4rem;
+    background: transparent;
+}
+
+/* Ajuste no Container Principal para n�o ficar embaixo do menu */
+.hero-container {
+    padding-top: 8rem; /* Espa�o pro menu */
+}
+
+/* Lado Esquerdo */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.badges {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+}
+
+p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+/* Card de Anima��o do Fluxo */
+.flow-animation-card {
+    background: linear-gradient(145deg, var(--bg-surface), #0a0a0a);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.flow-step {
+    padding: 1rem;
+    background: #1a1a1a;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid #333;
+}
+
+.flow-step.highlight {
+    background: var(--wine);
+    border-color: var(--wine-hover);
+    box-shadow: 0 0 20px rgba(94, 11, 21, 0.5);
+}
+
+.flow-arrow {
+    color: var(--text-muted);
+}
+
+.scroll-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.scroll-link:hover {
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+}
+
+/* =========================================
+   PAINEL DE LOGIN / REGISTRO
+========================================= */
+.auth-panel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-panel {
+    background-color: var(--bg-surface);
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.auth-panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-panel p {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem;
+    background-color: #000;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--wine);
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.forgot-pwd {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.forgot-pwd:hover {
+    color: #fff;
+}
+
+.btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--wine);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--wine-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--wine);
+    background-color: rgba(94, 11, 21, 0.1);
+}
+
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE E TABLETS)
+========================================= */
+
+/* Para telas de Tablet e telas menores (abaixo de 992px) */
+@media (max-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr; /* Muda de 2 colunas para 1 coluna */
+        padding: 2rem;
+        padding-top: 7rem; /* Espa�o adequado para a barra fina */
+        gap: 3rem;
+        text-align: center; /* Centraliza o texto para melhor leitura */
+    }
+
+    .hero-content {
+        align-items: center; /* Centraliza os elementos (badges, card) */
+    }
+
+    .badges {
+        flex-wrap: wrap; /* Permite que as tags quebrem de linha se n�o couberem */
+        justify-content: center;
+    }
+
+    .bg-overlay {
+        /* Altera o degrad� para escurecer de cima para baixo, garantindo legibilidade */
+        background: linear-gradient(180deg, rgba(7, 7, 7, 0.90) 0%, rgba(7, 7, 7, 0.95) 100%);
+    }
+
+    .auth-panel-wrapper {
+        margin-top: 2rem;
+    }
+
+    /* BARRA SUPERIOR: Mant�m lado a lado, fina e elegante */
+    .top-navbar {
+        padding: 0 1.5rem; /* Margens laterais menores no mobile */
+        height: 70px;      /* Barra super fina */
+    }
+
+    .logo-img {
+        max-height: 38px;  /* Logo proporcional para caber perfeitamente na barra fina */
+    }
+
+    .nav-links {
+        gap: 1rem;         /* Espa�amento compacto entre os links */
+    }
+
+    .nav-links a {
+        font-size: 0.8rem; /* Letra levemente menor para caber em telas pequenas */
+    }
+
+    .nav-btn-login {
+        padding: 0.4rem 1rem; /* Bot�o de entrar ajustado */
+    }
+}
+
+/* Para Smartphones (abaixo de 480px) */
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.2rem; /* Reduz o tamanho do t�tulo principal */
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    /* Adapta��o do Card de Anima��o para caber na tela */
+    .flow-animation-card {
+        flex-direction: column; /* Empilha os blocos verticalmente */
+        gap: 1rem;
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg); /* Gira a seta para apontar para baixo */
+        margin: 0.5rem 0;
+    }
+
+    .auth-panel {
+        padding: 2rem;
+    }
+
+    /* Otimiza��o de �rea de toque para navega��o fluida */
+    .input-group input, 
+    .btn {
+        min-height: 50px; 
+        font-size: 1rem;
+    }
+}
+
+/* Dentro do seu @media (max-width: 992px) adicione: */
+.top-navbar {
+    padding: 1rem 2rem;
+}
+
+/* Dentro do seu @media (max-width: 480px) adicione: */
+.top-navbar {
+    flex-direction: column; /* Empilha o logo e os links no mobile */
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.nav-links {
+    gap: 1rem;
+}
+
+.nav-links a {
+    font-size: 0.8rem;
+}
+
+.badges {
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.badge {
+    font-size: 0.6rem; /* Fica bem sutil no celular */
+    padding: 0.3rem 0.6rem;
+}
+
+/* =========================================
+   ESTILOS DO POPUP (MODAL DE LOGIN)
+========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none; /* Oculto por padr�o */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Quando ativo via JavaScript */
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.auth-panel.modal-content {
+    position: relative;
+    max-width: 420px;
+    width: 90%;
+    animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Bot�o de Fechar (X) */
+.close-modal {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+}
+
+/* Anima��o suave de expans�o do popup */
+@keyframes scaleUp {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Ajuste do Hero Container para ocupar o espa�o centralizado sem o split-screen */
+.hero-container {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    margin-top: 80px;
+    padding: 4rem;
+    max-width: 850px;
+    background: transparent;
+}
+
+@media (max-width: 992px) {
+    .hero-container {
+        padding: 2rem;
+        padding-top: 7rem;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .hero-content {
+        align-items: center;
+    }
+}
+
+/* ==================================================
+   BOT�ES PADR�O DO SISTEMA (MODAIS E PAGAMENTO)
+================================================== */
+.btn-vinho {
+    background-color: var(--wine);
+    color: #ffffff;
+    border: 1px solid var(--wine);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+}
+.btn-vinho:hover {
+    background-color: var(--wine-hover);
+    box-shadow: 0 4px 15px rgba(94, 11, 21, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-cancelar {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+.btn-cancelar:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff; text-shadow: 0 0 20px rgba(94, 11, 21, 0.4);
+    border-color: var(--text-muted);
+}
+/* ================== MODAIS (Para login e auth) ================== */
+.modal-overlay {
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85); 
+    backdrop-filter: blur(8px);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    z-index: 2000; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: all 0.3s ease;
+}
+.modal-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+.modal-content {
+    transform: translateY(10px) scale(0.98); 
+    transition: transform var(--motion-base) var(--ease-standard);
+    width: 90%; 
+    max-width: 440px; 
+    position: relative; 
+    padding: 2.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color); 
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-subtle);
+    box-sizing: border-box;
+}
+.modal-overlay.active .modal-content { 
+    transform: translateY(0) scale(1); 
+}
+/* =========================================
+   SISTEMA DE BACKGROUND ANIMADO
+========================================= */
+.bg-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fadeCycle 12s infinite;
+}
+
+.slide-1 {
+    background-image: url('../img/avatar-antes.jpg'); 
+    background-color: #1a0306;
+    animation-delay: 0s;
+}
+
+.slide-2 {
+    background-image: url('../img/avatar-depois.jpg');
+    background-color: #000000;
+    animation-delay: 6s;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(7, 7, 7, 0.90) 0%, rgba(7, 7, 7, 0.95) 100%);
+}
+
+@keyframes fadeCycle {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    40% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 0; }
+}

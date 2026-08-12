@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070708">
+    <title>LifeVU Studio — Painel da Engine</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/dashboard.css?v=5">
+    <link rel="stylesheet" href="css/dashboard-v2.css?v=1">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <header class="dash-navbar">
+        <a class="studio-brand" href="dashboard.html" aria-label="LifeVU Studio">
+            <img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+            <span><span class="brand-life">LIFE</span><span class="brand-vu">VU</span><small>STUDIO</small></span>
+        </a>
+
+        <div class="studio-status" aria-label="Status da interface">
+            <span></span> Engine pronta
+        </div>
+
+        <div class="nav-left-group nav-actions">
+            <a href="como-usar.html" class="btn-upgrade btn-help"><i class="ph ph-question"></i><span>Como usar</span></a>
+            <button id="btnPlanosVIP" class="btn-upgrade"><i class="ph ph-crown"></i><span>Planos VIP</span></button>
+            <button id="btnOpenAccount" class="user-plan-badge">
+                <i class="ph ph-user"></i> <span id="nav-username-display">Minha conta</span>
+            </button>
+            <button class="user-wallet-badge" id="btnOpenFunding" title="Adicionar moedas">
+                <i class="ph-fill ph-coins"></i>
+                <b id="user-balance-display">0 moedas</b>
+            </button>
+        </div>
+    </header>
+
+    <main class="dash-main">
+        <section class="studio-intro">
+            <div>
+                <p class="studio-kicker"><span></span> Console de síntese visual</p>
+                <h1>Direcione a imagem.<br><em>A engine compila.</em></h1>
+                <p>Escolha o modo, envie as referências e calibre a identidade. A LifeVU organiza o prompt final sem quebrar seu fluxo criativo.</p>
+            </div>
+            <div class="engine-readout" aria-hidden="true">
+                <img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+                <span class="readout-ring"></span>
+                <dl>
+                    <div><dt>Núcleo</dt><dd>LV-01</dd></div>
+                    <div><dt>Estado</dt><dd>Standby</dd></div>
+                    <div><dt>Saída</dt><dd>Prompt</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <ol class="workflow-rail" aria-label="Etapas da geração">
+            <li class="is-current" data-workflow-step="mode"><span>01</span>Modo</li>
+            <li data-workflow-step="upload"><span>02</span>Referências</li>
+            <li data-workflow-step="config"><span>03</span>Calibração</li>
+            <li data-workflow-step="output"><span>04</span>Saída</li>
+        </ol>
+
+        <section class="engine-card" id="card-mode">
+            <div class="card-heading">
+                <span class="card-index">01 / MODO</span>
+                <h2>Como vamos construir?</h2>
+                <p>Selecione a operação que melhor representa seu resultado.</p>
+            </div>
+            <div class="mode-grid">
+                <button class="mode-option-btn" id="modeRenderBtn">
+                    <i class="ph ph-sparkle"></i>
+                    <span><b>Renderizar</b><small>Aprimora luz, textura e acabamento.</small></span>
+                    <em>01</em>
+                </button>
+                <button class="mode-option-btn" id="modeRefBtn">
+                    <i class="ph ph-scan"></i>
+                    <span><b>Referência + pose</b><small>Traduz pose, atmosfera e enquadramento.</small></span>
+                    <em>02</em>
+                </button>
+                <button class="mode-option-btn" id="modeCoupleBtn">
+                    <i class="ph ph-users-three"></i>
+                    <span><b>Casal + duplas</b><small>Coordena duas identidades na mesma cena.</small></span>
+                    <em>03</em>
+                </button>
+            </div>
+        </section>
+
+        <section class="engine-card" id="card-upload" style="display: none;">
+            <div class="card-heading">
+                <span class="card-index">02 / REFERÊNCIAS</span>
+                <h2 id="upload-card-title">Envie as imagens</h2>
+                <p>A prévia aparece aqui; os arquivos continuam sob controle da engine.</p>
+            </div>
+            <div id="upload-dynamic-area"></div>
+            <button type="button" id="btnProceedToConfig" class="btn-engine-primary" style="display: none;"><span>Avançar para calibração</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        </section>
+
+        <section class="engine-card" id="card-config" style="display: none;">
+            <div class="card-heading">
+                <span class="card-index">03 / CALIBRAÇÃO</span>
+                <h2>Calibre a direção visual</h2>
+                <p>Refine os sinais importantes antes da síntese final.</p>
+            </div>
+            <div class="config-grid">
+                <div class="config-box">
+                    <label>IA Alvo Final</label>
+                    <select id="select-ia-alvo"><option value="gemini">Google Gemini</option><option value="gpt">OpenAI GPT</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Estilo Visual</label>
+                    <select id="select-estilo"><option value="cinematic">Cinematográfico 8K</option><option value="homemade">Câmera realista</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Textura de Pele</label>
+                    <select id="select-pele"><option value="micro-poros">Microtextura Natural</option><option value="molhado">Efeito Molhado</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Iluminação</label>
+                    <select id="select-iluminacao"><option value="Match the reference exactly">Manter original</option><option value="Cinematic dark studio lighting">Estúdio dramático</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Expressão Facial</label>
+                    <select id="select-expressao"><option value="Match the original avatar expression">Manter Original</option><option value="Intense, seductive gaze">Olhar Intenso</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Cenário / Fundo</label>
+                    <select id="select-fundo"><option value="Keep the exact same background as the reference">Manter original</option><option value="Dark urban alleyway at night">Beco urbano noturno</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Modificação de Cabelo</label>
+                    <select id="select-cabelo"><option value="original">Manter Originais</option><option value="platinum">Platinado 8K</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Fidelidade de Roupa</label>
+                    <select id="select-roupa"><option value="fiel">Manter roupas estritas</option><option value="adaptar">Adaptar ao cenário</option></select>
+                </div>
+                <div class="config-box">
+                    <label>Fidelidade ao Rosto (<span id="val-rosto">L3</span>)</label>
+                    <input type="range" id="slider-rosto" min="1" max="5" value="3">
+                </div>
+                <div class="config-box config-wide">
+                    <label>Detalhes Adicionais (Opcional)</label>
+                    <textarea id="custom-prompt" placeholder="Ex.: segurando um copo, luz lateral dramática, rua molhada..." style="resize: vertical; min-height: 110px;"></textarea>
+                </div>
+            </div>
+
+            <div class="ai-process-visual" id="aiProcessVisual" aria-live="polite" aria-hidden="true">
+                <div class="ai-orb" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                    <img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+                </div>
+                <div class="ai-process-copy">
+                    <small>LifeVU neural compiler</small>
+                    <strong id="aiProcessPhase">Preparando contexto visual</strong>
+                    <div class="ai-process-bar"><span></span></div>
+                    <p>Não feche esta tela enquanto a síntese estiver em andamento.</p>
+                </div>
+            </div>
+
+            <button id="btnGeneratePrompt" class="btn-engine-primary"><span>Processar motor de IA</span><i class="ph ph-atom"></i></button>
+        </section>
+
+        <section class="engine-card" id="card-output" style="display: none;">
+            <div class="card-heading output-heading">
+                <span class="card-index">04 / SAÍDA</span>
+                <h2>Prompt de autoignição pronto</h2>
+                <p>A compilação foi concluída e está pronta para seguir ao gerador escolhido.</p>
+            </div>
+            <div class="success-box"><h4><i class="ph-fill ph-check-circle"></i> Síntese concluída</h4><p>Seu código protegido foi preparado e está pronto para uso.</p></div>
+            <textarea id="output-copypaste" style="position: absolute; left: -9999px;"></textarea>
+            <button id="btnCopyPrompt" class="btn-engine-primary"><span>Copiar prompt</span><i class="ph ph-copy"></i></button>
+        </section>
+    </main>
+
+    <!-- =========================================
+         MODAIS (POP-UPS) DESIGN CORRIGIDO
+    ========================================= -->
+
+    <!-- MODAL DE PERFIL (VINCULAR CONTA) -->
+    <div id="accountModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="btnCloseAccount" style="position: absolute; top: 1.2rem; right: 1.2rem; background: transparent; border: none; color: #aaa; cursor: pointer; font-size: 1.5rem;"><i class="ph ph-x"></i></button>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="ph ph-user-circle" style="font-size: 4.5rem; color: #5e0b15; opacity: 0.9;"></i>
+                <h3 style="font-size: 1.2rem; color: #fff; margin: 0.5rem 0;" id="modal-email-display">carregando...</h3>
+                <p style="color: #8a101f; font-weight: bold; margin: 0; font-size: 0.9rem;" id="modal-plan-display">Plano: Free</p>
+            </div>
+            
+            <hr style="border-color: #222; margin-bottom: 1.5rem;">
+            
+            <div class="profile-box">
+                <label style="font-size: 0.85rem; color: #aaa; text-transform: uppercase;">Vincular Conta IMVU:</label>
+                
+                <p style="font-size: 0.85rem; color: #ccc; margin-top: 15px; margin-bottom: 5px;">1. Coloque este código na sua <strong>Bio (Tagline)</strong> do IMVU:</p>
+                <div class="token-display-box">
+                    <strong id="bio-token-display" style="color: #fff; font-family: monospace; font-size: 1.2rem; letter-spacing: 2px;">CARREGANDO...</strong>
+                </div>
+
+                <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 5px;">2. Digite seu Nick abaixo e verifique:</p>
+                
+                <div class="verify-group">
+                    <input type="text" id="imvu-username" placeholder="@SeuNick" class="imvu-input">
+                    <button id="btnVerifyIMVU" class="btn-verify">VERIFICAR</button>
+                </div>
+                <small id="imvu-save-msg" style="display: none; font-size: 0.8rem; margin-top: 10px;"></small>
+            </div>
+
+            <!-- BOT�O SECRETO DE ADMIN (Oculto por padr�o) -->
+            <button id="btnGoAdmin" class="btn-vinho" style="display: none; width: 100%; margin-bottom: 10px; border: 1px solid #ff5555; background: #2a0509;">
+                <i class="ph-fill ph-shield-check" style="color: #ff5555;"></i> ACESSAR PAINEL ADMIN
+            </button>
+
+            <button id="btnLogout" class="btn-ghost-logout"><i class="ph ph-sign-out"></i> SAIR DA CONTA</button>
+        </div>
+    </div>
+
+    <!-- =========================================
+         MODAIS (POP-UPS) DESIGN 100% VINHO
+    ========================================= -->
+
+    <!-- 1. MODAL DE FINANCIAMENTO (MINHA CARTEIRA) -->
+    <div id="fundingModal" class="modal-overlay funding-modal" role="dialog" aria-modal="true" aria-labelledby="funding-modal-title">
+        <div class="modal-content funding-modal-content">
+            <button type="button" id="btnCloseFunding" class="modal-close-button" aria-label="Fechar minha carteira"><span aria-hidden="true">×</span></button>
+            <h3 id="funding-modal-title" class="funding-modal-title"><i class="ph-fill ph-wallet" aria-hidden="true"></i> MINHA CARTEIRA</h3>
+
+            <div class="wallet-summary">
+                <div class="wallet-summary-item">
+                    <p style="margin: 0; color: #aaa; font-size: 0.85rem;">Saldo Atual</p>
+                    <p style="margin: 5px 0 0 0; color: #fff; font-size: 1.2rem; font-weight: bold;" id="carteira-saldo">Carregando...</p>
+                </div>
+                <div class="wallet-summary-item wallet-summary-plan">
+                    <p style="margin: 0; color: #aaa; font-size: 0.85rem;">Plano Ativo</p>
+                    <p style="margin: 5px 0 0 0; color: var(--wine-red); font-size: 1.2rem; font-weight: bold;" id="carteira-plano">Carregando...</p>
+                </div>
+            </div>
+
+            <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 1.5rem; border-bottom: 1px solid #222; padding-bottom: 15px;">Conta vinculada IMVU: <strong id="fund-linked-account" style="color: #3b82f6;">Verificando...</strong></p>
+
+            <h4 style="color: #fff; margin-bottom: 15px; text-align: left;">Adquirir Moedas ou VIP:</h4>
+            <div class="wallet-plans">
+                <div class="wallet-plan-card">
+                    <h5 style="color: #fff; margin: 0 0 10px 0;">Moeda Avulsa</h5>
+                    <p style="color: #aaa; font-size: 0.75rem; margin-bottom: 15px;">Sob Demanda</p>
+                    <p style="color: #ff5555; font-weight: bold; margin-bottom: 15px;">1.000 Créditos · 8 moedas</p>
+                    <button class="btn-vinho btn-comprar-plano" style="padding: 8px; font-size: 0.8rem;" onclick="prepararPagamento('avulso')">COMPRAR</button>
+                </div>
+                <div class="wallet-plan-card wallet-plan-card-popular">
+                    <span class="wallet-popular-badge">POPULAR</span>
+                    <h5 style="color: #fff; margin: 0 0 10px 0;">VIP 15 Dias</h5>
+                    <p style="color: #aaa; font-size: 0.75rem; margin-bottom: 15px;">Ilimitado</p>
+                    <p style="color: #ff5555; font-weight: bold; margin-bottom: 15px;">5.000 Créditos</p>
+                    <button class="btn-vinho btn-comprar-plano" style="padding: 8px; font-size: 0.8rem;" onclick="prepararPagamento('vip15')">ASSINAR</button>
+                </div>
+                <div class="wallet-plan-card">
+                    <h5 style="color: #fff; margin: 0 0 10px 0;">VIP 30 Dias</h5>
+                    <p style="color: #aaa; font-size: 0.75rem; margin-bottom: 15px;">Ilimitado PRO</p>
+                    <p style="color: #ff5555; font-weight: bold; margin-bottom: 15px;">9.000 Créditos</p>
+                    <button class="btn-vinho btn-comprar-plano" style="padding: 8px; font-size: 0.8rem;" onclick="prepararPagamento('vip30')">ASSINAR</button>
+                </div>
+            </div>
+            <div class="vcoin-warning" id="txt-aviso-pagamento" style="display: none; margin-top: 15px;">Aviso: você precisa vincular sua conta IMVU no menu “Minha conta” primeiro.</div>
+        </div>
+    </div>
+
+    <!-- 2. MODAL DE SLIDER (MOEDAS AVULSAS) -->
+    <div id="modalSliderAvulso" class="modal-overlay">
+        <div class="modal-content" style="max-width: 420px; text-align: center;">
+            <button onclick="document.getElementById('modalSliderAvulso').classList.remove('active')" style="position: absolute; top: 1.2rem; right: 1.2rem; background: transparent; border: none; color: #aaa; cursor: pointer; font-size: 1.5rem;"><i class="ph ph-x"></i></button>
+            <h3 style="color: #fff; margin-bottom: 5px; text-transform: uppercase;">Moedas Avulsas</h3>
+            <p style="color: var(--wine-red); font-weight: bold; margin-bottom: 2rem; font-size: 0.9rem;">Conta vinculada: <span id="display-nick-avulso">...</span></p>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid #333; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                <label style="color: #aaa; font-size: 0.85rem; text-transform: uppercase;">Quantidade a comprar:</label>
+                <input type="range" id="dash-credit-slider" min="0" max="7" step="1" value="0" style="width: 100%; margin: 15px 0; accent-color: var(--wine-red);">
+                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                    <span id="dash-credit-val" style="color: #fff;">1.000 Créditos</span><i class="ph ph-arrow-right" style="color: #555;"></i><span id="dash-moeda-val" style="color: var(--wine-red);">8 moedas</span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <button class="btn-vinho" id="btnContinueAvulso">CONTINUAR</button>
+                <button class="btn-cancelar" onclick="document.getElementById('modalSliderAvulso').classList.remove('active')">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MODAL DE PAGAMENTO FINAL (PIX IMVU) -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content" style="text-align: center;">
+            <button onclick="cancelarEscutaPagamento()" style="position: absolute; top: 1.2rem; right: 1.2rem; background: transparent; border: none; color: #aaa; cursor: pointer; font-size: 1.5rem;"><i class="ph ph-x"></i></button>
+            <h3 style="font-size: 1.2rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">PAGAMENTO</h3>
+            <p style="color: #aaa; font-size: 0.9rem; margin-top: 0;">Transferência para: <strong style="color: var(--wine-red);" id="pay-linked-account">...</strong></p>
+
+            <div id="payment-step-1">
+                <p style="color: #ccc; margin-top: 20px;">Envie exatamente <strong style="color: #ff3333; font-size: 1.2rem;" id="pay-amount-display">1.000 Créditos</strong> para a nossa conta matriz do sistema:</p>
+                <div class="token-display-box" style="margin: 20px 0;"><strong style="color: #fff; font-family: monospace; font-size: 1.5rem; letter-spacing: 2px;">@IIaisis</strong></div>
+                <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Após o envio, nosso motor rastreará a rede do IMVU e liberará seu saldo automaticamente em até 2 minutos.</p>
+                <div style="display: flex; flex-direction: column; width: 100%;">
+                    <button id="btnIrParaImvu" class="btn-vinho" onclick="iniciarEscutaPagamento()">IR PARA O IMVU E PAGAR</button>
+                    <button class="btn-cancelar" onclick="cancelarEscutaPagamento()">CANCELAR TRANSAÇÃO</button>
+                </div>
+            </div>
+
+            <div id="payment-step-2" style="display: none; padding: 20px 0;">
+                <i class="ph-fill ph-check-circle" style="font-size: 4rem; color: #00ffcc; margin-bottom: 15px;"></i>
+                <h3 style="color: #00ffcc; margin-top: 0;">PAGAMENTO CONCLUÍDO!</h3>
+                <p style="color: #aaa;">Suas moedas/VIP foram creditados na sua conta. Aproveite a Engine!</p>
+                <button class="btn-vinho" onclick="window.location.reload()" style="margin-top: 20px;">VOLTAR PARA A ENGINE</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PUXANDO A L�GICA E O COMPILER -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/economy.js"></script>
+    <script src="js/compiler.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/dashboard-experience.js"></script>
+</body>
+</html>

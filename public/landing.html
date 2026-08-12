@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070708">
+    <meta name="description" content="LifeVU transforma avatares em imagens hiper-realistas com identidade preservada e direção visual guiada por IA.">
+    <title>LifeVU — AI Engine para avatares</title>
+    <link rel="icon" type="image/svg+xml" href="img/lifevu-mark.svg">
+    <link rel="alternate icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/landing.css?v=5">
+    <link rel="stylesheet" href="css/immersive.css?v=7">
+    <script>
+        document.documentElement.classList.add('js');
+        window.__lifevuLoaderFallback = window.setTimeout(function () {
+            document.documentElement.classList.add('loader-timeout');
+        }, 6500);
+    </script>
+</head>
+<body id="top">
+    <div class="brand-loader" aria-hidden="true">
+        <div class="loader-mark lifevu-mark-host" data-lifevu-mark data-mark-mode="loader">
+            <img class="lifevu-mark-fallback" src="img/lifevu-mark.svg" alt="" width="320" height="320">
+            <span class="loader-scan"></span>
+        </div>
+        <p class="loader-word"><span>LIFE</span><strong>VU</strong></p>
+        <div class="loader-sequence" aria-hidden="true">
+            <span>12 fragmentos</span><i></i><span>núcleo óptico</span><i></i><span>online</span>
+        </div>
+        <div class="loader-progress"><span></span></div>
+        <small>Inicializando núcleo visual</small>
+    </div>
+    <!-- Background Animado -->
+    <div class="bg-slider">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="bg-overlay"></div>
+    </div>
+
+    <!-- NAVBAR (MENU SUPERIOR) -->
+    <header class="top-navbar">
+        <a href="#top" class="logo-nav" aria-label="LifeVU — início">
+            <img src="img/lifevu-mark.svg" alt="" class="logo-img" width="320" height="320">
+            <span class="nav-wordmark"><span class="brand-life">LIFE</span><span class="brand-vu">VU</span></span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+            <span></span><span></span>
+            <span class="sr-only">Abrir menu</span>
+        </button>
+
+        <nav class="nav-links" id="primaryNav">
+            <a href="como-usar.html">Como Usar</a>
+            <a href="#resultados">Resultados</a>
+            <a href="#planos">Planos</a>
+            <button id="openLoginBtn" class="nav-btn-login">Entrar</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="assembly-hero" id="tecnologia" aria-labelledby="hero-title">
+            <div class="hero-sticky">
+                <div class="hero-grid">
+                    <div class="hero-copy" data-reveal>
+                        <p class="eyebrow"><span class="status-pulse"></span> AI engine para identidade visual</p>
+                        <h1 id="hero-title" aria-label="LifeVU">
+                            <span>LIFE</span><strong>VU</strong>
+                        </h1>
+                        <p class="hero-statement">Seu avatar continua sendo seu. A pose, a luz e o mundo ao redor evoluem.</p>
+                        <div class="hero-actions">
+                            <button class="signal-button signal-button-primary" data-open-login>
+                                <span>Ativar a engine</span><i aria-hidden="true">↗</i>
+                            </button>
+                            <a class="signal-button signal-button-ghost" href="#resultados">
+                                <span>Ver sínteses</span><i aria-hidden="true">↓</i>
+                            </a>
+                        </div>
+                        <ul class="hero-signals" aria-label="Características da engine">
+                            <li><span>01</span> Identidade preservada</li>
+                            <li><span>02</span> Direção por referência</li>
+                            <li><span>03</span> Prompt de autoignição</li>
+                        </ul>
+                    </div>
+
+                    <div class="hero-stage" aria-hidden="true">
+                        <figure class="hero-frame hero-frame-source">
+                            <img src="img/pose-reference-01.webp" alt="" width="736" height="981" fetchpriority="high">
+                            <figcaption>Referência</figcaption>
+                        </figure>
+                        <div class="assembly-core">
+                            <div class="lifevu-mark-host hero-mark-host" data-lifevu-mark data-mark-mode="hero">
+                                <img class="lifevu-mark-fallback" src="img/lifevu-mark.svg" alt="" width="320" height="320">
+                            </div>
+                            <span class="core-beam"></span>
+                            <span class="core-label">Núcleo ativo</span>
+                        </div>
+                        <figure class="hero-frame hero-frame-result">
+                            <img src="img/result-01.webp" alt="" width="1122" height="1402" fetchpriority="high">
+                            <figcaption>Resultado</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="scroll-cue" aria-hidden="true">
+                    <span>Deslize para explorar</span>
+                    <i></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section section-shell" id="resultados" aria-labelledby="results-title">
+            <div class="section-heading" data-reveal>
+                <p class="eyebrow">Arquivos reais de síntese</p>
+                <h2 id="results-title">Uma identidade.<br><span>Duas direções.</span></h2>
+                <p>O rosto fornece a assinatura. A referência fornece composição e clima. A LifeVU conecta os dois sem apagar o personagem.</p>
+            </div>
+
+            <div class="case-selector" role="tablist" aria-label="Selecionar resultado" data-reveal>
+                <button class="case-tab is-active" role="tab" aria-selected="true" data-case="laundromat">
+                    <span>01</span> Lavanderia
+                </button>
+                <button class="case-tab" role="tab" aria-selected="false" data-case="mirror-shot">
+                    <span>02</span> Mirror shot
+                </button>
+                <button class="case-tab" role="tab" aria-selected="false" data-case="night-drive">
+                    <span>03</span> Night drive
+                </button>
+            </div>
+
+            <div class="synthesis-console" data-reveal>
+                <article class="case-panel is-active" data-case-panel="laundromat">
+                    <div class="input-stack">
+                        <figure class="media-card identity-card">
+                            <img src="img/identity-source.webp" alt="Rosto usado como identidade principal" width="1122" height="1402" loading="lazy">
+                            <figcaption><span>Input A</span><strong>Identidade</strong></figcaption>
+                        </figure>
+                        <span class="operator" aria-hidden="true">+</span>
+                        <figure class="media-card pose-card">
+                            <img src="img/pose3.jpg" alt="Pose em uma lavanderia usada como referência" width="736" height="981" loading="lazy">
+                            <figcaption><span>Input B</span><strong>Pose</strong></figcaption>
+                        </figure>
+                    </div>
+                    <div class="synthesis-line" aria-hidden="true"><span></span><b>LifeVU</b></div>
+                    <figure class="result-card">
+                        <img src="img/resultado3.png" alt="Resultado com a identidade aplicada à pose na lavanderia" width="1086" height="1448" loading="lazy">
+                        <figcaption><span>Output 01</span><strong>Lavanderia</strong><em>Identidade · pose · textura</em></figcaption>
+                    </figure>
+                </article>
+
+                <article class="case-panel" data-case-panel="mirror-shot">
+                    <div class="input-stack">
+                        <figure class="media-card identity-card">
+                            <img src="img/identity-source.webp" alt="Rosto usado como identidade principal" width="1122" height="1402" loading="lazy">
+                            <figcaption><span>Input A</span><strong>Identidade</strong></figcaption>
+                        </figure>
+                        <span class="operator" aria-hidden="true">+</span>
+                        <figure class="media-card pose-card">
+                            <img src="img/pose4.jpg" alt="Pose diante do espelho usada como referência" width="720" height="1280" loading="lazy">
+                            <figcaption><span>Input B</span><strong>Direção</strong></figcaption>
+                        </figure>
+                    </div>
+                    <div class="synthesis-line" aria-hidden="true"><span></span><b>LifeVU</b></div>
+                    <figure class="result-card result-card-tall">
+                        <img src="img/resultado4.png" alt="Resultado com a identidade aplicada à pose diante do espelho" width="941" height="1672" loading="lazy">
+                        <figcaption><span>Output 02</span><strong>Mirror shot</strong><em>Identidade · atitude · luz</em></figcaption>
+                    </figure>
+                </article>
+
+                <article class="case-panel" data-case-panel="night-drive">
+                    <div class="input-stack">
+                        <figure class="media-card identity-card">
+                            <img src="img/identity-source.webp" alt="Rosto usado como identidade principal" width="1122" height="1402" loading="lazy">
+                            <figcaption><span>Input A</span><strong>Identidade</strong></figcaption>
+                        </figure>
+                        <span class="operator" aria-hidden="true">+</span>
+                        <figure class="media-card pose-card">
+                            <img src="img/pose-reference-02.webp" alt="Pose noturna usada como referência" width="736" height="1308" loading="lazy">
+                            <figcaption><span>Input B</span><strong>Direção</strong></figcaption>
+                        </figure>
+                    </div>
+                    <div class="synthesis-line" aria-hidden="true"><span></span><b>LifeVU</b></div>
+                    <figure class="result-card result-card-tall">
+                        <img src="img/result-02.webp" alt="Resultado noturno com a identidade preservada" width="900" height="1600" loading="lazy">
+                        <figcaption><span>Output 03</span><strong>Night drive</strong><em>Identidade · atmosfera · luz</em></figcaption>
+                    </figure>
+                </article>
+            </div>
+        </section>
+
+        <section class="process-section section-shell" id="processo" aria-labelledby="process-title">
+            <div class="process-intro" data-reveal>
+                <p class="eyebrow">Fluxo sem engenharia de prompt</p>
+                <h2 id="process-title">Você dirige.<br><span>A engine traduz.</span></h2>
+            </div>
+            <ol class="process-track">
+                <li data-reveal><span>01</span><div><strong>Envie a identidade</strong><p>Use o rosto ou avatar que precisa permanecer reconhecível.</p></div></li>
+                <li data-reveal><span>02</span><div><strong>Escolha a direção</strong><p>Adicione pose, enquadramento, luz e clima como referência.</p></div></li>
+                <li data-reveal><span>03</span><div><strong>Ative a síntese</strong><p>A LifeVU organiza as instruções e entrega o prompt pronto para uso.</p></div></li>
+            </ol>
+        </section>
+
+    <!-- Substitua apenas o miolo dos seus 4 cards por estes: -->
+    
+    <!-- =========================================
+       SE��O DE PLANOS (ID "planos" restaura o menu)
+    ========================================= -->
+    <section class="pricing-section section-shell" id="planos">
+        <div class="section-heading pricing-heading" data-reveal>
+            <p class="eyebrow">Escolha seu ritmo</p>
+            <h2 class="pricing-title">Um plano para cada <span>frequência criativa.</span></h2>
+        </div>
+        
+        <div class="pricing-grid">
+            
+            <!-- PLANO FREE -->
+            <div class="pricing-card">
+                <h4 class="plan-name">Acesso Free</h4>
+                <div class="plan-price">R$ 0<span>/sempre</span></div>
+                <ul class="plan-features">
+                    <li>5 moedas gratuitas por dia</li>
+                    <li>1 geração = 1 moeda</li>
+                    <li>Renovação diária não cumulativa</li>
+                    <li class="cross">Sem acesso aos pacotes VIP</li>
+                </ul>
+                <button class="btn-plan" onclick="window.location.href='dashboard.html'">COMEÇAR AGORA</button>
+            </div>
+
+            <!-- PLANO AVULSO -->
+            <div class="pricing-card">
+                <h4 class="plan-name">Avulso</h4>
+                <div class="plan-price" style="font-size: 2.2rem;">Sob Demanda</div>
+                <ul class="plan-features">
+                    <li>Compre moedas quando quiser</li>
+                    <li>1 geração = 1 moeda</li>
+                    <li>As moedas não expiram</li>
+                    <li>Ideal para uso ocasional</li>
+                </ul>
+                <!-- A classe btn-buy-plan aciona o popup inteligente -->
+                <button class="btn-plan btn-buy-plan" data-plan="avulso">COMPRAR MOEDAS</button>
+            </div>
+
+            <!-- VIP 15 DIAS (Classe "popular" acende a borda e a tag) -->
+            <div class="pricing-card popular">
+                <h4 class="plan-name">VIP 15 Dias</h4>
+                <div class="plan-price">5.000<span> Créditos</span></div>
+                <ul class="plan-features">
+                    <li><strong>Gerações ilimitadas</strong></li>
+                    <li>Acesso prioritário nos servidores</li>
+                    <li>Válido por 15 dias exatos</li>
+                    <li>Moedas avulsas são preservadas</li>
+                </ul>
+                <button class="btn-plan filled btn-buy-plan" data-plan="vip15">ASSINAR VIP</button>
+            </div>
+
+            <!-- VIP 30 DIAS -->
+            <div class="pricing-card">
+                <h4 class="plan-name">VIP 30 Dias</h4>
+                <div class="plan-price">9.000<span> Créditos</span></div>
+                <ul class="plan-features">
+                    <li><strong>Gerações ilimitadas</strong></li>
+                    <li>Acesso prioritário nos servidores</li>
+                    <li>Válido por 30 dias exatos</li>
+                    <li>Moedas avulsas são preservadas</li>
+                </ul>
+                <button class="btn-plan btn-buy-plan" data-plan="vip30">ASSINAR VIP PRO</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="final-cta section-shell" aria-labelledby="final-title">
+        <div class="final-core" aria-hidden="true">
+            <span></span><img src="img/lifevu-mark.svg" alt="" width="320" height="320">
+        </div>
+        <div data-reveal>
+            <p class="eyebrow">Núcleo pronto</p>
+            <h2 id="final-title">Não descreva o resultado.<br><span>Dirija a transformação.</span></h2>
+            <button class="signal-button signal-button-primary" data-open-login><span>Entrar na LifeVU</span><i aria-hidden="true">↗</i></button>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <a href="#top" class="footer-brand">LIFE<strong>VU</strong></a>
+        <p>AI engine para direção visual de avatares.</p>
+        <a href="como-usar.html">Como usar</a>
+    </footer>
+
+    </main>
+
+    <!-- POPUP UNIFICADO DE AUTENTICA��O (MODAL) -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="auth-panel modal-content">
+            <button id="closeLoginBtn" class="close-modal">&times;</button>
+            
+            <!-- 1. SEC��O DE LOGIN -->
+            <div id="loginSection">
+                <h2>Acesso Life VU</h2>
+                <p>Use suas credenciais para continuar.</p>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="username">Usuário ou e-mail</label>
+                        <input type="text" id="username" placeholder="Digite seu usuário ou e-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" placeholder="Digite sua senha" required>
+                    </div>
+                    <div class="options">
+                        <label><input type="checkbox"> Lembrar-me</label>
+                        <a href="#" id="goRecoveryBtn" class="forgot-pwd">Esqueci a senha</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ENTRAR</button>
+                    <button type="button" id="goRegisterBtn" class="btn btn-secondary">CRIAR NOVA CONTA</button>
+                </form>
+            </div>
+
+            <!-- 2. SEC��O DE REGISTRO -->
+            <div id="registerSection" style="display: none;">
+                <h2>Criar Conta</h2>
+                <p>Entre no fluxo de síntese hiper-realista.</p>
+                <form id="register-form">
+                    <div class="input-group">
+                        <label for="reg-username">Novo usuário</label>
+                        <input type="text" id="reg-username" placeholder="Escolha seu usuário" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-email">E-mail</label>
+                        <input type="email" id="reg-email" placeholder="Seu e-mail principal" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-password">Senha</label>
+                        <input type="password" id="reg-password" placeholder="Crie uma senha forte" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">CRIAR E VERIFICAR</button>
+                    <button type="button" id="goLoginBtn" class="btn btn-secondary">JÁ TENHO UMA CONTA</button>
+                </form>
+            </div>
+
+            <!-- 3. SEC��O DE VERIFICA��O DE E-MAIL (CADASTRO) -->
+            <div id="verificationSection" style="display: none;">
+                <h2>Verificar E-mail</h2>
+                <p>Enviamos um código de 6 dígitos para o seu e-mail. Digite-o abaixo para ativar a conta.</p>
+                <p style="font-size: 0.85rem; color: #ff9800; margin-bottom: 1.5rem; border-left: 3px solid #ff9800; padding-left: 10px;">
+                    Não encontrou? Verifique sua caixa de spam ou lixo eletrônico.
+                </p>
+                <form id="verification-form">
+                    <div class="input-group">
+                        <label for="ver-code">Código de segurança</label>
+                        <input type="text" id="ver-code" placeholder="000000" maxlength="6" required style="text-align: center; font-size: 1.5rem; letter-spacing: 5px; font-weight: bold;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">CONFIRMAR E ENTRAR</button>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem; align-items: center;">
+                        <a href="#" id="resendCodeBtn" class="forgot-pwd">Reenviar código</a>
+                        <a href="#" id="backToRegisterBtn" class="forgot-pwd">Voltar</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 4. SEC��O DE RECUPERA��O DE SENHA (PEDIR E-MAIL) -->
+            <div id="recoverySection" style="display: none;">
+                <h2>Recuperar Senha</h2>
+                <p>Digite seu e-mail cadastrado para receber o link de redefinição.</p>
+                <p style="font-size: 0.85rem; color: #ff9800; margin-bottom: 1.5rem; border-left: 3px solid #ff9800; padding-left: 10px;">
+                    Não encontrou? Verifique sua caixa de spam ou lixo eletrônico.
+                </p>
+                <form id="recovery-form">
+                    <div class="input-group">
+                        <label for="rec-email">E-mail Cadastrado</label>
+                        <input type="email" id="rec-email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ENVIAR LINK</button>
+                    <button type="button" id="backToLoginBtn" class="btn btn-secondary">VOLTAR PARA O LOGIN</button>
+                </form>
+            </div>
+
+            <!-- 5. SEC��O DE DIGITAR NOVA SENHA -->
+            <div id="newPasswordSection" style="display: none;">
+                <h2>Nova Senha</h2>
+                <p>Digite sua nova senha abaixo para concluir a recuperação.</p>
+                <form id="new-password-form">
+                    <div class="input-group">
+                        <label for="new-password">Nova Senha</label>
+                        <input type="password" id="new-password" placeholder="Digite a nova senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ATUALIZAR SENHA</button>
+                    <button type="button" id="backToLoginBtn2" class="btn btn-secondary">CANCELAR</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BIBLIOTECAS (SUPABASE + EMAILJS) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- SCRIPT BLINDADO DE CONTROLE E PERSIST�NCIA -->
+    <script>
+        (function() {
+            const supabaseUrl = 'https://hrldelnvaukkroupanvg.supabase.co';
+            const supabaseKey = 'sb_publishable_s4MEjHRwsFnDfUKBLheacg_wjuDzguc';
+            const lifeVuSupabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+            emailjs.init({ publicKey: 'lD5p-VxD5ebnb_KWO' });
+            
+            const modal = document.getElementById('loginModal');
+            const openBtn = document.getElementById('openLoginBtn');
+            const closeBtn = document.getElementById('closeLoginBtn');
+            
+            const loginSection = document.getElementById('loginSection');
+            const registerSection = document.getElementById('registerSection');
+            const verificationSection = document.getElementById('verificationSection');
+            const recoverySection = document.getElementById('recoverySection');
+            const newPasswordSection = document.getElementById('newPasswordSection');
+            
+            const goRegisterBtn = document.getElementById('goRegisterBtn');
+            const goLoginBtn = document.getElementById('goLoginBtn');
+            const goRecoveryBtn = document.getElementById('goRecoveryBtn');
+            const backToLoginBtn = document.getElementById('backToLoginBtn');
+            const backToLoginBtn2 = document.getElementById('backToLoginBtn2');
+            const backToRegisterBtn = document.getElementById('backToRegisterBtn');
+
+            let dadosTemporarios = { email: "", username: "", password: "", codigo: "" };
+            let usuarioLogado = false;
+
+            function showSection(sectionToShow) {
+                loginSection.style.display = 'none';
+                registerSection.style.display = 'none';
+                verificationSection.style.display = 'none';
+                recoverySection.style.display = 'none';
+                newPasswordSection.style.display = 'none';
+                sectionToShow.style.display = 'block';
+            }
+
+            // 1. VERIFICA��O DE SESS�O ATIVA (Mant�m o cliente logado)
+            async function verificarSessaoAtiva() {
+                const { data: { session } } = await lifeVuSupabase.auth.getSession();
+                if (session) {
+                    usuarioLogado = true;
+                    openBtn.innerText = "Painel"; // Transforma "Entrar" em "Painel"
+                }
+            }
+            verificarSessaoAtiva();
+
+            // Ouve altera��es de autentica��o em tempo real
+            lifeVuSupabase.auth.onAuthStateChange(async (event, session) => {
+                if (event === 'PASSWORD_RECOVERY') {
+                    modal.classList.add('active');
+                    showSection(newPasswordSection);
+                } else if (session) {
+                    usuarioLogado = true;
+                    openBtn.innerText = "Painel";
+                }
+            });
+
+            // Comportamento inteligente do bot�o superior
+            openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (usuarioLogado) {
+                    // Se j� estiver logado, vai direto para o painel
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Se n�o estiver, abre o modal de login
+                    modal.classList.add('active');
+                    showSection(loginSection);
+                }
+            });
+
+            closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+            goRegisterBtn.addEventListener('click', () => showSection(registerSection));
+            goLoginBtn.addEventListener('click', () => showSection(loginSection));
+            backToLoginBtn.addEventListener('click', () => showSection(loginSection));
+            backToLoginBtn2.addEventListener('click', () => showSection(loginSection));
+            goRecoveryBtn.addEventListener('click', (e) => { e.preventDefault(); showSection(recoverySection); });
+            backToRegisterBtn.addEventListener('click', (e) => { e.preventDefault(); showSection(registerSection); });
+
+            // ==========================================
+            // 2. REGISTRO (Com EmailJS)
+            // ==========================================
+            document.getElementById('register-form').addEventListener('submit', async function(event) {
+                event.preventDefault(); 
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                btnSubmit.innerText = "ENVIANDO CÓDIGO...";
+                btnSubmit.disabled = true;
+
+                dadosTemporarios.username = document.getElementById('reg-username').value;
+                dadosTemporarios.email = document.getElementById('reg-email').value;
+                dadosTemporarios.password = document.getElementById('reg-password').value;
+                dadosTemporarios.codigo = Math.floor(100000 + Math.random() * 900000).toString();
+
+                try {
+                    await emailjs.send('service_uy9yhhg', 'template_rrzfoyi', {
+                        to_name: dadosTemporarios.username,
+                        to_email: dadosTemporarios.email,
+                        message: dadosTemporarios.codigo
+                    });
+                    showSection(verificationSection);
+                } catch (err) {
+                    console.error('EmailJS:', err.status, err.text);
+                    alert(err.text || "Não foi possível enviar o e-mail de verificação.");
+                } finally {
+                    btnSubmit.innerText = "CRIAR E VERIFICAR";
+                    btnSubmit.disabled = false;
+                }
+            });
+
+            document.getElementById('verification-form').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                btnSubmit.innerText = "CRIANDO CONTA...";
+                
+                const codigoDigitado = document.getElementById('ver-code').value;
+
+                if (codigoDigitado === dadosTemporarios.codigo) {
+                    const { data, error } = await lifeVuSupabase.auth.signUp({
+                        email: dadosTemporarios.email,
+                        password: dadosTemporarios.password,
+                        options: { data: { username: dadosTemporarios.username } }
+                    });
+
+                    if (error) {
+                        alert("Erro ao registrar no banco: " + error.message);
+                        btnSubmit.innerText = "CONFIRMAR E ENTRAR";
+                    } else {
+                        alert("Conta criada com sucesso!");
+                        window.location.href = 'dashboard.html';
+                    }
+                } else {
+                    alert("Código incorreto!");
+                    btnSubmit.innerText = "CONFIRMAR E ENTRAR";
+                }
+            });
+
+            // ==========================================
+            // 3. RECUPERA��O DE SENHA
+            // ==========================================
+            document.getElementById('recovery-form').addEventListener('submit', async function(event) {
+                event.preventDefault(); 
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                btnSubmit.innerText = "ENVIANDO LINK...";
+
+                const userEmail = document.getElementById('rec-email').value;
+
+                const { data, error } = await lifeVuSupabase.auth.resetPasswordForEmail(userEmail, {
+                    redirectTo: window.location.origin + '/'
+                });
+
+                if (error) {
+                    alert("Erro ao enviar link: " + error.message);
+                    btnSubmit.innerText = "ENVIAR LINK";
+                } else {
+                    alert("Link seguro enviado! Verifique sua caixa de entrada e Spam.");
+                    showSection(loginSection);
+                }
+            });
+
+            document.getElementById('new-password-form').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                btnSubmit.innerText = "ATUALIZANDO...";
+
+                const novaSenha = document.getElementById('new-password').value;
+
+                const { data, error } = await lifeVuSupabase.auth.updateUser({
+                    password: novaSenha
+                });
+
+                if (error) {
+                    alert("Erro ao atualizar senha: " + error.message);
+                    btnSubmit.innerText = "ATUALIZAR SENHA";
+                } else {
+                    alert("Senha alterada com sucesso! Faça login com a nova senha.");
+                    window.location.href = '/';
+                }
+            });
+
+            // ==========================================
+            // 4. LOGIN
+            // ==========================================
+            document.getElementById('login-form').addEventListener('submit', async function(event) {
+                event.preventDefault(); 
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                btnSubmit.innerText = "ENTRANDO...";
+                
+                const userEmail = document.getElementById('username').value; 
+                const userPassword = document.getElementById('password').value;
+
+                const { data, error } = await lifeVuSupabase.auth.signInWithPassword({
+                    email: userEmail,
+                    password: userPassword,
+                });
+
+                if (error) {
+                    alert("Credenciais incorretas.");
+                    btnSubmit.innerText = "ENTRAR";
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+        })();
+    </script>
+
+<!-- CSS DOS MODAIS (Para a Landing Page) -->
+    <style>
+        .pay-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity var(--motion-base) var(--ease-standard), visibility var(--motion-base) var(--ease-standard); }
+        .pay-modal-overlay.active { opacity: 1; visibility: visible; }
+        .pay-modal-content { transform: translateY(10px) scale(0.98); transition: transform var(--motion-base) var(--ease-standard); width: 90%; max-width: 440px; position: relative; padding: 2.5rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-subtle); box-sizing: border-box; text-align: center; }
+        .pay-modal-overlay.active .pay-modal-content { transform: translateY(0) scale(1); }
+        .close-pay-modal { position: absolute; top: 1.2rem; right: 1.2rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; transition: color var(--motion-fast); }
+        .close-pay-modal:hover { color: var(--text-primary); }
+        .target-account-box { background: rgba(0, 0, 0, 0.4); padding: 1.2rem; border-radius: var(--radius-sm); border: 1px dashed var(--wine-border); margin: 15px 0; font-family: monospace; font-size: 1.5rem; color: #fff; letter-spacing: 2px; }
+    </style>
+
+    <!-- MODAL 1: MANDAR VINCULAR A CONTA -->
+    <div id="modalLinkAccount" class="pay-modal-overlay">
+        <div class="pay-modal-content">
+            <button class="close-pay-modal" onclick="closePayModals()"><i class="ph ph-x"></i></button>
+            <i class="ph-fill ph-warning-circle" style="font-size: 4rem; color: #ff5555; margin-bottom: 1rem;"></i>
+            <h3 style="color: #fff; margin-bottom: 10px; text-transform: uppercase;">Ação necessária</h3>
+            <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 2rem;">Você precisa vincular sua conta do IMVU no painel antes de realizar pagamentos. Isso garante que as moedas caiam no lugar certo.</p>
+            <button class="btn-vinho" onclick="window.location.href='dashboard.html'">IR PARA O PAINEL E VINCULAR</button>
+        </div>
+    </div>
+
+    <!-- MODAL 2: SLIDER DE MOEDAS AVULSAS -->
+    <div id="modalSliderAvulso" class="pay-modal-overlay">
+        <div class="pay-modal-content">
+            <button class="close-pay-modal" onclick="closePayModals()"><i class="ph ph-x"></i></button>
+            <h3 style="color: #fff; margin-bottom: 5px; text-transform: uppercase;">Moedas Avulsas</h3>
+            <p style="color: var(--wine); font-weight: bold; margin-bottom: 2rem; font-size: 0.9rem;">Conta vinculada: <span id="display-nick-avulso">...</span></p>
+            
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                <label style="color: #aaa; font-size: 0.85rem; text-transform: uppercase;">Quantidade a comprar:</label>
+                <!-- O Roxo saiu, o Vinho entrou! -->
+                <input type="range" id="landing-credit-slider" min="0" max="7" step="1" value="0" style="width: 100%; margin: 15px 0; accent-color: var(--wine);">
+                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                    <span id="landing-credit-val" style="color: #fff;">1.000 Créditos</span>
+                    <i class="ph ph-arrow-right" style="color: #555;"></i>
+                    <span id="landing-moeda-val" style="color: var(--wine);">8 Moedas</span>
+                </div>
+            </div>
+            
+            <!-- Bot�es Padronizados -->
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <button class="btn-vinho" id="btnContinueAvulso">CONTINUAR</button>
+                <button class="btn-cancelar" onclick="closePayModals()">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: INSTRU��ES FINAIS DE PAGAMENTO -->
+    <div id="modalPaymentFinal" class="pay-modal-overlay">
+        <div class="pay-modal-content">
+            <button class="close-pay-modal" onclick="closePayModals()"><i class="ph ph-x"></i></button>
+            <h3 style="color: #fff; margin-bottom: 5px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="ph-fill ph-bank" style="color: var(--wine);"></i> PAGAMENTO
+            </h3>
+            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem;">Transferência autorizada para: <strong style="color: var(--wine);" id="display-nick-final">...</strong></p>
+            
+            <p style="color: #fff; font-size: 0.95rem;">Envie exatamente <strong id="final-credit-value" style="color: #ff5555; font-size: 1.1rem;">0 Créditos</strong> para a nossa conta matriz do sistema:</p>
+            
+            <div class="target-account-box" style="border-color: var(--wine);">
+                @IIaisis
+            </div>
+
+            <p style="color: #aaa; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                Após o envio, nosso motor rastreará a rede do IMVU e liberará seu plano automaticamente em até 2 minutos.
+            </p>
+
+            <!-- Bot�es Padronizados -->
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <button class="btn-vinho" onclick="window.open('https://pt.imvu.com/next/av/IIaisis/', '_blank')">IR PARA O IMVU E PAGAR</button>
+                <button class="btn-cancelar" onclick="closePayModals()">CANCELAR TRANSAÇÃO</button>
+            </div>
+        </div>
+    </div>
+
+   <!-- L�GICA DO FUNIL DE PAGAMENTO E SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/economy.js"></script>
+    <script>
+        const supabaseUrl = 'https://hrldelnvaukkroupanvg.supabase.co';
+        // CONTINUE USANDO A PUBLISHABLE NO FRONTEND!
+        const supabaseKey = 'sb_publishable_s4MEjHRwsFnDfUKBLheacg_wjuDzguc'; 
+        const lifeVuSupabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const modais = {
+            link: document.getElementById('modalLinkAccount'),
+            slider: document.getElementById('modalSliderAvulso'),
+            final: document.getElementById('modalPaymentFinal')
+        };
+
+        window.closePayModals = () => {
+            Object.values(modais).forEach(m => m.classList.remove('active'));
+        };
+
+        // L�gica do Slider Avulso
+        const slider = document.getElementById('landing-credit-slider');
+        const valoresAvulsos = [1000, 2000, 3000, 4000, 6000, 7000, 8000, 10000];
+        slider.addEventListener('input', (e) => {
+            const creditos = valoresAvulsos[parseInt(e.target.value)];
+            const { CREDITS_PER_PACKAGE, COINS_PER_1000_CREDITS } = window.LifeVUEconomy;
+            const moedas = Math.floor(creditos / CREDITS_PER_PACKAGE) * COINS_PER_1000_CREDITS;
+            document.getElementById('landing-credit-val').innerText = `${creditos.toLocaleString('pt-BR')} Créditos`;
+            document.getElementById('landing-moeda-val').innerText = `${moedas} Moedas`;
+        });
+
+        // Passa do Slider para a Tela Final
+        document.getElementById('btnContinueAvulso').addEventListener('click', () => {
+            const creditos = valoresAvulsos[parseInt(slider.value)];
+            document.getElementById('final-credit-value').innerText = `${creditos.toLocaleString('pt-BR')} Créditos`;
+            modais.slider.classList.remove('active');
+            modais.final.classList.add('active');
+        });
+
+        // ========================================================
+        // O OUVINTE EM TEMPO REAL (O SEGREDO PARA DESTRAVAR A TELA)
+        // ========================================================
+        let listenerAtivo = null;
+
+        function ligarRadarDoSupabase(userId) {
+            // Se j� tiver um radar ligado, a gente desliga para n�o bugar
+            if (listenerAtivo) { lifeVuSupabase.removeChannel(listenerAtivo); }
+
+            console.log("Radar do Supabase Ligado! Vigiando a conta do usu�rio...");
+
+            listenerAtivo = lifeVuSupabase
+              .channel('rastreio-pagamento-landing')
+              .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'profiles', filter: `id=eq.${userId}` }, 
+              (payload) => {
+                  const moedasAntigas = payload.old.moedas_avulsas || 0;
+                  const moedasNovas = payload.new.moedas_avulsas || 0;
+                  const planoAntigo = payload.old.plano;
+                  const planoNovo = payload.new.plano;
+
+                  // Se as moedas subiram ou o VIP entrou... SUCESSO!
+                  if (moedasNovas > moedasAntigas || planoNovo !== planoAntigo) {
+                      
+                      // 1. FECHA A TELA DE PAGAMENTO NA HORA
+                      closePayModals();
+                      
+                      // 2. AVISA O USU�RIO E REDIRECIONA PRO PAINEL
+                      alert('PAGAMENTO CONFIRMADO! Suas moedas foram creditadas.');
+                      window.location.href = 'dashboard.html';
+                      
+                      // Desliga o radar
+                      lifeVuSupabase.removeChannel(listenerAtivo);
+                  }
+              }).subscribe();
+        }
+
+        // ========================================================
+
+        // Captura o clique em todos os bot�es de plano
+        document.querySelectorAll('.btn-buy-plan').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const planType = e.target.getAttribute('data-plan');
+                
+                // 1. Checa se t� logado
+                const { data: { user } } = await lifeVuSupabase.auth.getUser();
+                if (!user) {
+                    alert("Você precisa criar uma conta ou fazer login primeiro!");
+                    window.location.href = '/#top'; 
+                    return;
+                }
+
+                // 2. Busca o perfil para ver se tem IMVU vinculado
+                const { data: profile } = await lifeVuSupabase.from('profiles').select('imvu_account').eq('id', user.id).single();
+                
+                if (!profile || !profile.imvu_account) {
+                    modais.link.classList.add('active');
+                    return;
+                }
+
+                // LIGA O RADAR ASSIM QUE O USU�RIO ENTRA NO FUNIL DE PAGAMENTO
+                ligarRadarDoSupabase(user.id);
+
+                // 3. Tudo certo! Direciona pro fluxo correto
+                const nick = profile.imvu_account;
+                document.getElementById('display-nick-avulso').innerText = `@${nick}`;
+                document.getElementById('display-nick-final').innerText = `@${nick}`;
+
+                if (planType === 'avulso') {
+                    modais.slider.classList.add('active');
+                } else if (planType === 'vip15') {
+                    document.getElementById('final-credit-value').innerText = `5.000 Créditos`;
+                    modais.final.classList.add('active');
+                } else if (planType === 'vip30') {
+                    document.getElementById('final-credit-value').innerText = `9.000 Créditos`;
+                    modais.final.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+    <script src="js/landing-experience.js?v=7" defer></script>
+</body>
+</html>
